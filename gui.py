@@ -6,9 +6,8 @@
 # back link to https://icons8.com
 # ================================
 
-import tkinter, os, webbrowser, schedule, time, os
 from tkinter import PhotoImage, BOTH, END, messagebox
-
+import tkinter, time, os
 
 def main():
 # HIGH LEVEL-ish FUNCTION
@@ -29,6 +28,11 @@ def main():
 
 
     # FUNCTIONS
+    def generate_password():
+        '''Generates Password'''
+        print(gen_pass_entry.get())
+        password_generator = secrets.token_hex(gen_pass_entry) # gen. the password
+        
 
 
     # LAYOUTS
@@ -56,14 +60,16 @@ def main():
     # GENERATE PASSWORD LAYOUT
     gen_title = tkinter.Label(gen_frame, text="Generate Password", underline=0)
     gen_pass = tkinter.Label(gen_frame, text="Password Length")
-    gen_pass_entry_box = tkinter.Entry(gen_frame, text="", width=45)
+    gen_pass_entry = tkinter.Entry(gen_frame, text="", width=45)
+    gen_pass_entry.insert("0", "10")
     gen_btn = tkinter.Button(gen_frame, text="Generate", height=1,underline=0)
     export_btn = tkinter.Button(gen_frame, text="Export", height=1,underline=0)
     exit_btn = tkinter.Button(gen_frame, text="Quit",height=1, underline=0, command=root.destroy)
+    
     #grid
     gen_title.grid(row=0, column=0)
     gen_pass.grid(row=1, column=0)
-    gen_pass_entry_box.grid(row=1, column=1, padx=5, pady=5, sticky="WE")
+    gen_pass_entry.grid(row=1, column=1, padx=5, pady=5, sticky="WE")
     gen_btn.grid(row=2, column=0, sticky="W")
     export_btn.grid(row=2, column=1, sticky="W")
     exit_btn.grid(row=3, column=0)
