@@ -39,8 +39,34 @@ def main():
     
 
     # AUTO GENERATE PASSWORD LAYOUT
-    auto_title = tkinter.Label(auto_gen_frame, text="Auto Generate",)
-    auto_title.grid(expand=True)
+    auto_title = tkinter.Label(auto_gen_frame, text="Auto Generate", underline=0)
+    auto_gen_msg = tkinter.Label(auto_gen_frame, text="Password Length")
+    auto_gen_entry_box = tkinter.Entry(auto_gen_frame, width=45)
+    auto_gen_btn = tkinter.Button(auto_gen_frame, text="Generate", width=8, height=1, underline=0 )
+    auto_gen_export_btn = tkinter.Button(auto_gen_frame, text="Export", width=8, height=1, underline=0)
+
+    # grid
+    auto_title.grid(row=0, column=0)
+    auto_gen_msg.grid(row=1, column=0)
+    auto_gen_entry_box.grid(row=1, column=1, padx=5, pady=5, sticky="WE")
+    auto_gen_btn.grid(row=2, column=0,sticky="W")
+    auto_gen_export_btn.grid(row=2, column=1,sticky="W")
+
+
+    # GENERATE PASSWORD LAYOUT
+    gen_title = tkinter.Label(gen_frame, text="Generate Password", underline=0)
+    gen_pass = tkinter.Label(gen_frame, text="Password Length")
+    gen_pass_entry_box = tkinter.Entry(gen_frame, text="", width=45)
+    gen_btn = tkinter.Button(gen_frame, text="Generate", height=1,underline=0)
+    export_btn = tkinter.Button(gen_frame, text="Export", height=1,underline=0)
+    exit_btn = tkinter.Button(gen_frame, text="Quit",height=1, underline=0, command=root.destroy)
+    #grid
+    gen_title.grid(row=0, column=0)
+    gen_pass.grid(row=1, column=0)
+    gen_pass_entry_box.grid(row=1, column=1, padx=5, pady=5, sticky="WE")
+    gen_btn.grid(row=2, column=0, sticky="W")
+    export_btn.grid(row=2, column=1, sticky="W")
+    exit_btn.grid(row=3, column=0)
 
 
 
