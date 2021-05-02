@@ -32,19 +32,30 @@ def main():
     # FUNCTIONS
     def generate_password():
         '''Generates Password'''
-        password_generator = secrets.token_hex(int(gen_pass_entry.get())) # gen. the password
-        text_box1.insert("1.0", password_generator)
+        conv_to_int = int(gen_pass_entry.get())
+        conv_to_int = conv_to_int // 2
+        print(conv_to_int)
+        password_generator = secrets.token_hex(conv_to_int) # gen. the password
+        text_box1.insert("1.0", password_generator + "\n")
         print(password_generator)
-        messagebox.showinfo("Success", "Password has been Generated!")
+        #messagebox.showinfo("Success", "Password has been Generated!")
         
 
     def export_password():
         '''exports password to a txt file'''
         filedialog.asksaveasfilename(initialdir="./", title="Select File", filetypes=((".txt file", "*.txt"), ("all files", "*.*")))
 
+    def clear():
+        '''clears the text box'''
+        text_box.delete("1.0", "end")
+        text_box1.delete("1.0", "end")
+        #messagebox.showinfo("Clear", "cleared!")
 
+    def auto_gen_passwoord():
+        pass
 
-
+    def auto_export_password():
+        pass
 
     # LAYOUTS
     auto_gen_frame = tkinter.LabelFrame(root, padx=5, pady=5)
@@ -60,6 +71,7 @@ def main():
     auto_generate_btn = tkinter.Button(auto_gen_frame, text="Generate", width=8, height=1, underline=0 )
     auto_export_btn = tkinter.Button(auto_gen_frame, text="Export", width=8, height=1, underline=0)
     text_box = tkinter.Text(auto_gen_frame, width=40, height=4, padx=5, pady=5)
+    auto_clear_btn = tkinter.Button(gen_frame, text="Clear",height=1, underline=0, command=clear)
 
     # grid
     auto_title.grid(row=0, column=0, padx=5, pady=5)
@@ -68,6 +80,8 @@ def main():
     auto_generate_btn.grid(row=2, column=0, padx=5, pady=5)
     auto_export_btn.grid(row=2, column=1, padx=5, pady=5)
     text_box.grid(row=3, column=0, padx=5, pady=5)
+    auto_clear_btn.grid(row=4, column=0, padx=5, pady=5)
+
 
 
     # GENERATE PASSWORD LAYOUT
@@ -79,6 +93,7 @@ def main():
     export_btn = tkinter.Button(gen_frame, text="Export", height=1,underline=0, command=export_password)
     exit_btn = tkinter.Button(gen_frame, text="Quit",height=1, underline=0, command=root.destroy)
     text_box1 = tkinter.Text(gen_frame, width=40, height=4, padx=5, pady=5)
+    clear_btn = tkinter.Button(gen_frame, text="Clear",height=1, underline=0, command=clear)
 
     #grid
     gen_title.place(relx=0.5, rely=1.0, anchor="s")
@@ -93,15 +108,7 @@ def main():
     export_btn.grid(row=2, column=1)
     exit_btn.grid(row=3, column=0)
     text_box1.grid(row=4)
-
-
-
-
-
-
-
-
-
+    clear_btn.grid(row=5)
 
 
     root.mainloop()
