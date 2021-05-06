@@ -43,7 +43,10 @@ def main():
 
     def export_password():
         '''exports password to a txt file'''
-        filedialog.asksaveasfilename(initialdir="./", title="Select File", filetypes=((".txt file", "*.txt"), ("all files", "*.*")))
+        with open("password.txt", "w") as file:
+            file.write(text_box1.get("1.0", "end"))
+        messagebox.showinfo("Export", f"Exported!")
+        #filedialog.asksaveasfilename(initialdir="./", title="Select File", filetypes=((".txt file", "*.txt"), ("all files", "*.*")))
 
     def clear():
         '''clears the text box'''
@@ -51,11 +54,20 @@ def main():
         text_box1.delete("1.0", "end")
         #messagebox.showinfo("Clear", "cleared!")
 
-    def auto_gen_passwoord():
-        pass
+    def auto_gen_password():
+        '''Auto Generates Password'''
+        conv_to_int = int(auto_gen_entry_box.get())
+        conv_to_int = conv_to_int // 2
+        print(conv_to_int)
+        password_generator = secrets.token_hex(conv_to_int)
+        text_box.insert("1.0", password_generator + "\n")
+        print(password_generator)
 
     def auto_export_password():
-        pass
+        '''exports password from auto generate textbox'''
+        with open("auto_password.txt", "w") as file:
+            file.write(text_box.get("1.0", "end"))
+        messagebox.showinfo("Export", f"Exported!")
 
     # LAYOUTS
     auto_gen_frame = tkinter.LabelFrame(root, padx=5, pady=5)
@@ -68,8 +80,8 @@ def main():
     auto_title = tkinter.Label(auto_gen_frame, text="Auto Generate", underline=0)
     auto_gen_msg = tkinter.Label(auto_gen_frame, text="Password Length")
     auto_gen_entry_box = tkinter.Entry(auto_gen_frame, width=45)
-    auto_generate_btn = tkinter.Button(auto_gen_frame, text="Generate", width=8, height=1, underline=0 )
-    auto_export_btn = tkinter.Button(auto_gen_frame, text="Export", width=8, height=1, underline=0)
+    auto_generate_btn = tkinter.Button(auto_gen_frame, text="Generate", width=8, height=1, underline=0, command=auto_gen_password)
+    auto_export_btn = tkinter.Button(auto_gen_frame, text="Export", width=8, height=1, underline=0, command=auto_export_password)
     text_box = tkinter.Text(auto_gen_frame, width=40, height=4, padx=5, pady=5)
     auto_clear_btn = tkinter.Button(gen_frame, text="Clear",height=1, underline=0, command=clear)
 
